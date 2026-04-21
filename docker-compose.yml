@@ -1,0 +1,19 @@
+# Optional: PostgreSQL with credentials matching backend defaults (cms_user / college_cms).
+# From repo root: docker compose up -d
+# Then in backend/.env set:
+#   DATABASE_URL=postgresql://cms_user:cms_pass@127.0.0.1:5432/college_cms
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: college_cms_db
+    environment:
+      POSTGRES_USER: cms_user
+      POSTGRES_PASSWORD: cms_pass
+      POSTGRES_DB: college_cms
+    ports:
+      - "5432:5432"
+    volumes:
+      - college_cms_pgdata:/var/lib/postgresql/data
+
+volumes:
+  college_cms_pgdata:
